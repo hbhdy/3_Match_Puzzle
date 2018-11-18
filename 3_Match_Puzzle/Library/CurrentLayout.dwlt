@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 492}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 442}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 4986
+  controlID: 2082
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 4968
+  controlID: 2083
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -367,14 +367,14 @@ MonoBehaviour:
     height: 464
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 0
-  lastFramingTime: 5956.221354603704
+  lastFramingTime: 1557.9953365267008
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -2.7241251, y: 3.9827318, z: -0.1015625}
+    m_Target: {x: 0.3899713, y: 3.5432718, z: 0.123046875}
     speed: 2
-    m_Value: {x: -2.7241251, y: 3.9827318, z: -0.1015625}
+    m_Value: {x: 0.3899713, y: 3.5432718, z: 0.123046875}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -402,15 +402,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 12.400408
+    m_Target: 9.604691
     speed: 2
-    m_Value: 12.400408
+    m_Value: 9.604691
   m_Ortho:
     m_Target: 1
     speed: 2
     m_Value: 1
   m_ShowGlobalGrid: 1
-  m_LastSceneViewRotation: {x: 0.13618761, y: -0.74478173, z: 0.16015416, w: 0.6333276}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -490,18 +490,18 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: fe19fbff320efcff1ac2fcff52c2fcff5ac2fcff206dffffcaf9ffff00000000
+    m_ExpandedIDs: 6cc6fdff1c74feff848bffff9efbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: (0,1) Tile
-      m_OriginalName: (0,1) Tile
+      m_Name: Col Arrow Holder
+      m_OriginalName: Col Arrow Holder
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -212732
+      m_UserData: -104402
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: de490000
     m_LastClickedID: 18910
-    m_ExpandedIDs: e62800008e29000094290000a0290000
+    m_ExpandedIDs: 000000008a27000094270000aa2700003228000046280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -591,7 +591,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: e62800008e29000094290000
+    m_ExpandedIDs: 000000008a2700003228000046280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

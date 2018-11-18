@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Hexagon_Black
+  - Hexagon_Blue
+  - Hexagon_Green
+  - Hexagon_Orange
+  - Hexagon_Red
+  - Hexagon_Pink
+  - Hexagon_Yellow
   layers:
   - Default
   - TransparentFX
