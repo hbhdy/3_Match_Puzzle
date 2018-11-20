@@ -203,7 +203,6 @@ GameObject:
   m_Component:
   - component: {fileID: 820377795}
   - component: {fileID: 820377796}
-  - component: {fileID: 820377797}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -239,26 +238,7 @@ MonoBehaviour:
   width: 6
   height: 7
   offSet: 10
-  tilePrefab: {fileID: 1953407809332906, guid: 0106395fae82a5c4c875928c2957fe51, type: 2}
-  hexagons:
-  - {fileID: 1032706451199776, guid: 730b4fbff8bece044bbb752e04aa2d56, type: 2}
-  - {fileID: 1221525540800590, guid: 9a8468c60eda034469ee7bbe616e0822, type: 2}
-  - {fileID: 1038168670011300, guid: 253b5bbf7c798d045b5995434e9ce731, type: 2}
-  - {fileID: 1780082612122476, guid: 71bd49990e002ef46845282b009d8add, type: 2}
-  - {fileID: 1415686929992612, guid: 7b8221c886000f84089627b750fee21c, type: 2}
-  - {fileID: 1896879909931682, guid: 61bc10cf80f79fa4dbd116743aaca2e0, type: 2}
-  - {fileID: 1407778461314418, guid: 209ba52f2c34d9944b009e2ae871c65c, type: 2}
+  blockPrefab: {fileID: 1471932067339158, guid: 3828d870d367d964289bc92d2108fb94,
+    type: 2}
   destroyEffect: {fileID: 1025926754311642, guid: 684261838a291f240b8acc996743a545,
     type: 2}
---- !u!114 &820377797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 820377794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80e4d6ff6f50a64fbe5c20368a6999b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentMatches: []

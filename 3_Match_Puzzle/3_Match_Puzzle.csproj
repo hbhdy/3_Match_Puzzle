@@ -233,8 +233,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\02.Script\BackgroundCtrl.cs" />
+    <Compile Include="Assets\02.Script\BlockCtrl.cs" />
     <Compile Include="Assets\02.Script\BoardCtrl.cs" />
-    <Compile Include="Assets\02.Script\FindMatches.cs" />
+    <Compile Include="Assets\02.Script\FindMatchesCtrl.cs" />
     <Compile Include="Assets\02.Script\HexagonCtrl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
