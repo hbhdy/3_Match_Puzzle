@@ -11,6 +11,7 @@ TagManager:
   - Hexagon_Red
   - Hexagon_Pink
   - Hexagon_Yellow
+  - Board
   layers:
   - Default
   - TransparentFX

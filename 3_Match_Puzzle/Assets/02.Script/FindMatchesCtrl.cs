@@ -3,7 +3,8 @@
 //using UnityEngine;
 //using System.Linq;
 
-//public class FindMatchesCtrl : MonoBehaviour {
+//public class FindMatchesCtrl : MonoBehaviour
+//{
 
 //    private BoardCtrl board;
 //    public List<GameObject> currentMatches = new List<GameObject>();
@@ -17,25 +18,25 @@
 //        StartCoroutine(FindAllMatchesCoroutine());
 //    }
 
-    
+
 //    private IEnumerator FindAllMatchesCoroutine()
 //    {
 //        yield return new WaitForSeconds(.2f);
-//        for(int i=0;i<board.width;i++)
+//        for (int i = 0; i < board.width; i++)
 //        {
-//            for(int j=0;j<board.height;j++)
+//            for (int j = 0; j < board.height; j++)
 //            {
-//                GameObject currentHexagon = board.allHexagons[i, j];
+//                GameObject currentHexagon = board.blockList[i, j];
 //                if (currentHexagon != null)
 //                {
 //                    if (i > 0 && i < board.width - 1)
 //                    {
-//                        GameObject leftHexagon = board.allHexagons[i - 1, j];
-//                        GameObject rightHexagon = board.allHexagons[i + 1, j];
+//                        GameObject leftHexagon = board.blockList[i - 1, j];
+//                        GameObject rightHexagon = board.blockList[i + 1, j];
 
-//                        if (leftHexagon!= null && rightHexagon != null)
+//                        if (leftHexagon != null && rightHexagon != null)
 //                        {
-//                            if(leftHexagon.tag == currentHexagon.tag && rightHexagon.tag== currentHexagon.tag)
+//                            if (leftHexagon.tag == currentHexagon.tag && rightHexagon.tag == currentHexagon.tag)
 //                            {
 //                                //if(currentHexagon.GetComponent<HexagonCtrl>().isRowBomb
 //                                //    || leftHexagon.GetComponent<HexagonCtrl>().isRowBomb
@@ -75,40 +76,18 @@
 //                                {
 //                                    currentMatches.Add(currentHexagon);
 //                                }
-//                                currentHexagon.GetComponent<HexagonCtrl>().isMatched = true;                            
+//                                currentHexagon.GetComponent<HexagonCtrl>().isMatched = true;
 //                            }
 //                        }
 //                    }
 
 //                    if (j > 0 && j < board.height - 1)
 //                    {
-//                        GameObject upHexagon = board.allHexagons[i, j+1];
-//                        GameObject downHexagon = board.allHexagons[i, j-1];
+//                        GameObject upHexagon = board.allHexagons[i, j + 1];
+//                        GameObject downHexagon = board.allHexagons[i, j - 1];
 
 //                        if (upHexagon != null && downHexagon != null)
 //                        {
-//                            //if (currentHexagon.GetComponent<HexagonCtrl>().isColBomb
-//                            //        || upHexagon.GetComponent<HexagonCtrl>().isColBomb
-//                            //        || downHexagon.GetComponent<HexagonCtrl>().isColBomb)
-//                            //{
-//                            //    currentMatches.Union(GetColPieces(i));
-//                            //}
-
-//                            //if (currentHexagon.GetComponent<HexagonCtrl>().isRowBomb)
-//                            //{
-//                            //    currentMatches.Union(GetColPieces(j));
-//                            //}
-
-//                            //if (upHexagon.GetComponent<HexagonCtrl>().isRowBomb)
-//                            //{
-//                            //    currentMatches.Union(GetColPieces(j + 1));
-//                            //}
-
-//                            //if (downHexagon.GetComponent<HexagonCtrl>().isRowBomb)
-//                            //{
-//                            //    currentMatches.Union(GetColPieces(j - 1));
-//                            //}
-
 //                            if (upHexagon.tag == currentHexagon.tag && downHexagon.tag == currentHexagon.tag)
 //                            {
 //                                if (!currentMatches.Contains(upHexagon))
