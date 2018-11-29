@@ -203,6 +203,7 @@ GameObject:
   m_Component:
   - component: {fileID: 820377795}
   - component: {fileID: 820377796}
+  - component: {fileID: 820377797}
   m_Layer: 0
   m_Name: Board
   m_TagString: Board
@@ -243,3 +244,15 @@ MonoBehaviour:
   destroyEffect: {fileID: 1025926754311642, guid: 684261838a291f240b8acc996743a545,
     type: 2}
   initBlockColor: 0
+--- !u!114 &820377797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 820377794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 991b8353413a0b3479c95306649d6194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMatches: []
