@@ -40,22 +40,22 @@ public class FindMatchesCtrl : MonoBehaviour
                             if (leftBlock.GetComponent<BlockCtrl>().currentColorNumber == currentBlock.GetComponent<BlockCtrl>().currentColorNumber 
                                 && rightBlock.GetComponent<BlockCtrl>().currentColorNumber == currentBlock.GetComponent<BlockCtrl>().currentColorNumber)
                             {
-                                if (!currentMatches.Contains(leftBlock))
-                                {
-                                    currentMatches.Add(leftBlock);
-                                }
+                                //if (!currentMatches.Contains(leftBlock))
+                                //{
+                                //    currentMatches.Add(leftBlock);
+                                //}
                                 leftBlock.GetComponent<BlockCtrl>().isMatched = true;
 
-                                if (!currentMatches.Contains(rightBlock))
-                                {
-                                    currentMatches.Add(rightBlock);
-                                }
+                                //if (!currentMatches.Contains(rightBlock))
+                                //{
+                                //    currentMatches.Add(rightBlock);
+                                //}
                                 rightBlock.GetComponent<BlockCtrl>().isMatched = true;
 
-                                if (!currentMatches.Contains(currentBlock))
-                                {
-                                    currentMatches.Add(currentBlock);
-                                }
+                                //if (!currentMatches.Contains(currentBlock))
+                                //{
+                                //    currentMatches.Add(currentBlock);
+                                //}
                                 currentBlock.GetComponent<BlockCtrl>().isMatched = true;
                             }
                         }
@@ -71,22 +71,22 @@ public class FindMatchesCtrl : MonoBehaviour
                             if (upBlock.GetComponent<BlockCtrl>().currentColorNumber == currentBlock.GetComponent<BlockCtrl>().currentColorNumber
                                 && downBlock.GetComponent<BlockCtrl>().currentColorNumber == currentBlock.GetComponent<BlockCtrl>().currentColorNumber)
                             {
-                                if (!currentMatches.Contains(upBlock))
-                                {
-                                    currentMatches.Add(upBlock);
-                                }
+                                //if (!currentMatches.Contains(upBlock))
+                                //{
+                                //    currentMatches.Add(upBlock);
+                                //}
                                 upBlock.GetComponent<BlockCtrl>().isMatched = true;
 
-                                if (!currentMatches.Contains(downBlock))
-                                {
-                                    currentMatches.Add(downBlock);
-                                }
+                                //if (!currentMatches.Contains(downBlock))
+                                //{
+                                //    currentMatches.Add(downBlock);
+                                //}
                                 downBlock.GetComponent<BlockCtrl>().isMatched = true;
 
-                                if (!currentMatches.Contains(currentBlock))
-                                {
-                                    currentMatches.Add(currentBlock);
-                                }
+                                //if (!currentMatches.Contains(currentBlock))
+                                //{
+                                //    currentMatches.Add(currentBlock);
+                                //}
                                 currentBlock.GetComponent<BlockCtrl>().isMatched = true;
                             }
                         }

@@ -22,10 +22,11 @@ public class BlockCtrl : MonoBehaviour {
     public int previousCol;
     public int previuseRow;
     public int currentColorNumber;
-    public bool isMatched = false;  // 블록 일치 판별
+    public bool isMatched = false;      // 블록 일치 판별
+    public bool blockToChange = false;  // 위치 이동 시킬 블록 
 
     [Header("Block Color Settings")]
-    public Sprite[] colorSprite;    // 블록 이미지 모음
+    public Sprite[] colorSprite;        // 블록 이미지 모음
 
     [Header("Swipe Variables")]
     public float swipeAngle = 0f;
@@ -51,14 +52,14 @@ public class BlockCtrl : MonoBehaviour {
 
     void Update()
     {
-        if (isMatched)
-        {
-            BlockScaleDown();
-        }
+        //if (isMatched)
+        //{
+        //    BlockScaleDown();
+        //}
 
         if (Mathf.Abs(column - transform.position.x) > .1)
         {
-            // Move Toward the target
+            // 목표한 위치로 이동 (x축)
             tempPosition = new Vector2(column, transform.position.y);
             transform.position = Vector2.Lerp(transform.position, tempPosition, .1f);
             if (board.blockList[column, row] != this.gameObject)
@@ -69,14 +70,14 @@ public class BlockCtrl : MonoBehaviour {
         }
         else
         {
-            //Directly set the position
+            // 위치 고정
             tempPosition = new Vector2(column, transform.position.y);
             transform.position = tempPosition; 
         }
 
         if (Mathf.Abs(row - transform.position.y) > .1)
         {
-            // Move Toward the target
+            // 목표한 위치로 이동 (y축)
             tempPosition = new Vector2(transform.position.x, row);
             transform.position = Vector2.Lerp(transform.position, tempPosition, .1f);
             if (board.blockList[column, row] != this.gameObject)
@@ -84,11 +85,10 @@ public class BlockCtrl : MonoBehaviour {
                 board.blockList[column, row] = this.gameObject;
             }
             findMatches.FindAllMatches();
-
         }
         else
         {
-            //Directly set the position
+            // 위치 고정
             tempPosition = new Vector2(transform.position.x, row);
             transform.position = tempPosition;
         }
@@ -106,9 +106,9 @@ public class BlockCtrl : MonoBehaviour {
         float startTime = Time.time;
         Vector2 nowScale = transform.localScale;
 
-        while (Time.time - startTime <= 0.3f)
+        while (Time.time - startTime <= 0.2f)
         {
-            transform.localScale = Vector2.Lerp(nowScale, Vector2.zero, (Time.time - startTime) / 0.2f);
+            transform.localScale = Vector2.Lerp(nowScale, Vector2.zero, (Time.time - startTime) / 0.3f);
             yield return null;
         }
 
@@ -119,6 +119,28 @@ public class BlockCtrl : MonoBehaviour {
     {
         StartCoroutine(BlockScaleDownCoroutine());
     }
+
+
+    // 블록 크기 복구 시킴
+    public IEnumerator BlockScaleUpCoroutine()
+    {
+        float startTime = Time.time;
+        Vector2 nowScale = transform.localScale;
+
+        while (Time.time - startTime <= 0.3f)
+        {
+            transform.localScale = Vector2.Lerp(Vector2.one, nowScale, (Time.time - startTime) / 0.2f);
+            yield return null;
+        }
+
+        transform.localScale = Vector2.one;
+    }
+
+    public void BlockScaleUp()
+    {
+        StartCoroutine(BlockScaleUpCoroutine());
+    }
+    
 
     public IEnumerator CheckMoveCoroutine()
     {
@@ -166,7 +188,7 @@ public class BlockCtrl : MonoBehaviour {
         if (Mathf.Abs(endTouchPosition.x - startTouchPosition.x) > swipeResist || Mathf.Abs(endTouchPosition.y - startTouchPosition.y) > swipeResist)
         {
             swipeAngle = Mathf.Atan2(endTouchPosition.y - startTouchPosition.y, endTouchPosition.x - startTouchPosition.x) * 180 / Mathf.PI;
-            MoveHexagonPieces();
+            MoveBlockDirection();
             board.currentState = GameState.wait;
         }
         else
@@ -175,7 +197,7 @@ public class BlockCtrl : MonoBehaviour {
         }
     }
 
-    void MoveHexagonPieces()
+    void MoveBlockDirection()
     {   
         // Right 방향으로 움직임
         if (swipeAngle > -45 && swipeAngle <= 45 && column < board.width)
