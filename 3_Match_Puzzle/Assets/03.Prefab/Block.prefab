@@ -68,6 +68,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 887fffc5ce81a864da144393e22eae3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  column: 0
+  row: 0
+  previousCol: 0
+  previuseRow: 0
+  currentColorNumber: 0
+  isMatched: 0
+  blockToChange: 0
+  columnMatch: 0
+  rowMatch: 0
   colorSprite:
   - {fileID: 21300000, guid: b37ba45566642da4d9f2c43b80092606, type: 3}
   - {fileID: 21300000, guid: a1974bc121fa199469fee4c2ff1806f6, type: 3}
@@ -76,12 +85,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a204a2a69fc832644bb06a00ade8297c, type: 3}
   - {fileID: 21300000, guid: 4c3ad93c52aa97f44841499b0a7dd1b0, type: 3}
   - {fileID: 21300000, guid: 9aa4b5828a0f7b84296ff834dc4450ae, type: 3}
-  column: 0
-  row: 0
-  currentColorNumber: 0
-  previousCol: 0
-  previuseRow: 0
-  isMatched: 0
   swipeAngle: 0
   swipeResist: 0.1
 --- !u!212 &212224235556152290

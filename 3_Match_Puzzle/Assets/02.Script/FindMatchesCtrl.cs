@@ -45,18 +45,21 @@ public class FindMatchesCtrl : MonoBehaviour
                                 //    currentMatches.Add(leftBlock);
                                 //}
                                 leftBlock.GetComponent<BlockCtrl>().isMatched = true;
+                                leftBlock.GetComponent<BlockCtrl>().rowMatch = true;
 
                                 //if (!currentMatches.Contains(rightBlock))
                                 //{
                                 //    currentMatches.Add(rightBlock);
                                 //}
                                 rightBlock.GetComponent<BlockCtrl>().isMatched = true;
+                                rightBlock.GetComponent<BlockCtrl>().rowMatch = true;
 
                                 //if (!currentMatches.Contains(currentBlock))
                                 //{
                                 //    currentMatches.Add(currentBlock);
                                 //}
                                 currentBlock.GetComponent<BlockCtrl>().isMatched = true;
+                                currentBlock.GetComponent<BlockCtrl>().rowMatch = true;
                             }
                         }
                     }

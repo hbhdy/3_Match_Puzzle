@@ -26,11 +26,21 @@ public class BoardCtrl : MonoBehaviour
 
     public int initBlockColorNumber;
 
+    public Vector2Int[] ChangePosition;
+
+    public int tempnumber = 0;
+
     void Start()
     {
         blockList = new GameObject[width, height]; // 크기만큼 2차원 배열 동적할당   
         findMatches = FindObjectOfType<FindMatchesCtrl>();
         InitializeBlock();
+
+        ChangePosition = new Vector2Int[3];
+        ChangePosition[0].y = 4;
+        ChangePosition[1].y = 5;
+        ChangePosition[2].y = 6;
+
     }
 
     // 블록 초기화 및 생성
@@ -49,7 +59,7 @@ public class BoardCtrl : MonoBehaviour
                 block.GetComponent<BlockCtrl>().column = i;
                 block.GetComponent<BlockCtrl>().row = j;
                 block.transform.parent = this.transform;
-                block.name = "block";
+                block.name = "block"+i+' '+j;
 
                 while (InitMatches(i, j, block) && maxCycle < 100)
                 {
@@ -117,25 +127,43 @@ public class BoardCtrl : MonoBehaviour
     // 재사용할 블록 설정
     private void RefillBlockSetting(int col, int row)
     {
+        if (tempnumber >= 3)
+            tempnumber = 0;
+        
         // 파티클 생성 및 삭제
         //GameObject particle = Instantiate(destroyEffect, blockList[col, row].transform.position, Quaternion.identity);
         //Destroy(particle, .5f);
 
         //Destroy(blockList[col, row]);
         //blockList[col, row] = null;
+        //if (blockList[col, row].GetComponent<BlockCtrl>().rowMatch == true)
+        //{
+        //    //if()
+        //}
+
         initBlockColorNumber = Random.Range(0, 7);
         Vector2 reStartPosition = new Vector2(col, row + offSet);  // 초기 위치를 잡아준다.
         blockList[col, row].GetComponent<BlockCtrl>().BlockScaleUp();
         blockList[col, row].GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
         blockList[col, row].GetComponent<BlockCtrl>().transform.localPosition = reStartPosition;
-        blockList[col, row].SetActive(false);
+        blockList[col, row].GetComponent<BlockCtrl>().column = col;
+        if (blockList[col, row].GetComponent<BlockCtrl>().rowMatch == true)
+        {
+            blockList[col, row].GetComponent<BlockCtrl>().row = 6;
+
+        }
+        else
+        {
+            blockList[col, row].GetComponent<BlockCtrl>().row = ChangePosition[tempnumber++].y;          
+        }
+        //blockList[col, row].SetActive(false);
         //initBlockColorNumber = Random.Range(0, 7);
         //Vector2 reStartPosition = new Vector2(col, row + offSet);  // 초기 위치를 잡아준다.
         //blockList[col, row].GetComponent<BlockCtrl>().BlockScaleUp();
         //blockList[col, row].GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
         //blockList[col, row].GetComponent<BlockCtrl>().transform.localPosition = reStartPosition;
-
-
+        
+        currentState = GameState.move;
     }
 
     //코드 수정해야함, Destroy 대신 재사용하기 위함, 이 함수가 Destroy 첫 시작 함수
@@ -180,6 +208,9 @@ public class BoardCtrl : MonoBehaviour
                 {
                     blockList[i, j].GetComponent<BlockCtrl>().row -= changeBlockCount;
                     blockList[i, j].GetComponent<BlockCtrl>().previuseRow = blockList[i, j].GetComponent<BlockCtrl>().row;
+                    //blockList[i, j].GetComponent<BlockCtrl>().rowMatch = false;
+                    //blockList[i, j].GetComponent<BlockCtrl>().isMatched = false;
+                    //blockList[i, j].GetComponent<BlockCtrl>().blockToChange = false;
                     //blockList[i, j].GetComponent<BlockCtrl>().isMatched = false;
                     //blockList[i, j].GetComponent<BlockCtrl>().blockToChange = true;
                     //blockList[i, j] = null;
