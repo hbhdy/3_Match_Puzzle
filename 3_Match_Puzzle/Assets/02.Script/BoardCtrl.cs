@@ -21,12 +21,13 @@ public class BoardCtrl : MonoBehaviour
     public GameObject blockPrefab;
     public GameObject[,] blockList;
     public GameObject destroyEffect;
+    public GameObject[] tempOjbect;
 
     private FindMatchesCtrl findMatches;
 
     public int initBlockColorNumber;
 
-    public Vector2Int[] ChangePosition;
+
 
     public int tempnumber = 0;
 
@@ -36,11 +37,7 @@ public class BoardCtrl : MonoBehaviour
         findMatches = FindObjectOfType<FindMatchesCtrl>();
         InitializeBlock();
 
-        ChangePosition = new Vector2Int[3];
-        ChangePosition[0].y = 4;
-        ChangePosition[1].y = 5;
-        ChangePosition[2].y = 6;
-
+        tempOjbect = new GameObject[12];
     }
 
     // 블록 초기화 및 생성
@@ -59,7 +56,7 @@ public class BoardCtrl : MonoBehaviour
                 block.GetComponent<BlockCtrl>().column = i;
                 block.GetComponent<BlockCtrl>().row = j;
                 block.transform.parent = this.transform;
-                block.name = "block"+i+' '+j;
+                block.name = "block" + i + ' ' + j;
 
                 while (InitMatches(i, j, block) && maxCycle < 100)
                 {
@@ -67,7 +64,7 @@ public class BoardCtrl : MonoBehaviour
                     maxCycle++;
                     block.GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
                     Debug.Log(maxCycle);
-                }  
+                }
                 blockList[i, j] = block;
 
             }
@@ -75,7 +72,7 @@ public class BoardCtrl : MonoBehaviour
     }
 
     // 초기 생성때 3 매치된 블록 판별
-    private bool InitMatches(int col, int row, GameObject block) 
+    private bool InitMatches(int col, int row, GameObject block)
     {
         if (col > 1 && row > 1)
         {
@@ -124,68 +121,26 @@ public class BoardCtrl : MonoBehaviour
         return false;
     }
 
-    // 재사용할 블록 설정
-    private void RefillBlockSetting(int col, int row)
-    {
-        if (tempnumber >= 3)
-            tempnumber = 0;
-        
-        // 파티클 생성 및 삭제
-        //GameObject particle = Instantiate(destroyEffect, blockList[col, row].transform.position, Quaternion.identity);
-        //Destroy(particle, .5f);
-
-        //Destroy(blockList[col, row]);
-        //blockList[col, row] = null;
-        //if (blockList[col, row].GetComponent<BlockCtrl>().rowMatch == true)
-        //{
-        //    //if()
-        //}
-
-        initBlockColorNumber = Random.Range(0, 7);
-        Vector2 reStartPosition = new Vector2(col, row + offSet);  // 초기 위치를 잡아준다.
-        blockList[col, row].GetComponent<BlockCtrl>().BlockScaleUp();
-        blockList[col, row].GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
-        blockList[col, row].GetComponent<BlockCtrl>().transform.localPosition = reStartPosition;
-        blockList[col, row].GetComponent<BlockCtrl>().column = col;
-        if (blockList[col, row].GetComponent<BlockCtrl>().rowMatch == true)
-        {
-            blockList[col, row].GetComponent<BlockCtrl>().row = 6;
-
-        }
-        else
-        {
-            blockList[col, row].GetComponent<BlockCtrl>().row = ChangePosition[tempnumber++].y;          
-        }
-        //blockList[col, row].SetActive(false);
-        //initBlockColorNumber = Random.Range(0, 7);
-        //Vector2 reStartPosition = new Vector2(col, row + offSet);  // 초기 위치를 잡아준다.
-        //blockList[col, row].GetComponent<BlockCtrl>().BlockScaleUp();
-        //blockList[col, row].GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
-        //blockList[col, row].GetComponent<BlockCtrl>().transform.localPosition = reStartPosition;
-        
-        currentState = GameState.move;
-    }
-
-    //코드 수정해야함, Destroy 대신 재사용하기 위함, 이 함수가 Destroy 첫 시작 함수
+    // 블록 Change의 첫함수
     public void DestroyMatches()
     {
+        //int tempnumber = 0;
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                //if (blockList[i, j] != null)
                 if (blockList[i, j].GetComponent<BlockCtrl>().isMatched)
                 {
-                    blockList[i, j].GetComponent<BlockCtrl>().blockToChange = true;
                     blockList[i, j].GetComponent<BlockCtrl>().BlockScaleDown();
 
                     GameObject particle = Instantiate(destroyEffect, blockList[i, j].transform.position, Quaternion.identity);
                     Destroy(particle, .5f);
-
-                    RefillBlockSetting(i, j);
+                    tempOjbect[tempnumber++] = blockList[i, j];
+                    blockList[i, j] = null;
                 }
             }
         }
+        tempnumber = 0;
         // 나머지 블록을 내리기 위한 코루틴 설정
         StartCoroutine(DecreaseRowCoroutine());
     }
@@ -199,96 +154,82 @@ public class BoardCtrl : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                //if (blockList[i, j] == null)
-                if (blockList[i, j].GetComponent<BlockCtrl>().blockToChange)
-                { 
+                if (blockList[i, j] == null)
+                {
                     changeBlockCount++;
                 }
                 else if (changeBlockCount > 0)
                 {
-                    blockList[i, j].GetComponent<BlockCtrl>().row -= changeBlockCount;
-                    blockList[i, j].GetComponent<BlockCtrl>().previuseRow = blockList[i, j].GetComponent<BlockCtrl>().row;
-                    //blockList[i, j].GetComponent<BlockCtrl>().rowMatch = false;
-                    //blockList[i, j].GetComponent<BlockCtrl>().isMatched = false;
-                    //blockList[i, j].GetComponent<BlockCtrl>().blockToChange = false;
-                    //blockList[i, j].GetComponent<BlockCtrl>().isMatched = false;
-                    //blockList[i, j].GetComponent<BlockCtrl>().blockToChange = true;
-                    //blockList[i, j] = null;
+                    blockList[i, j - changeBlockCount] = blockList[i, j];
+                    blockList[i, j - changeBlockCount].GetComponent<BlockCtrl>().row -= changeBlockCount;
+                    blockList[i, j] = null;
                 }
             }
             changeBlockCount = 0;
         }
-        yield return null;
-        //yield return new WaitForSeconds(1.4f);
-        //StartCoroutine(FillBoardCoroutine());
+        //yield return null;
+        yield return new WaitForSeconds(0.4f);
+        StartCoroutine(FillBoardCoroutine());
     }
 
-    ////빈칸에 다시 채워넣는 함수
-    //private void RefillBoard()
-    //{
-    //    for (int i = 0; i < width; i++)
-    //    {
-    //        for (int j = 0; j < height; j++)
-    //        {
-    //            //if (blockList[i, j] == null)
-    //            if(blockList[i, j].GetComponent<BlockCtrl>().blockToChange)
-    //            {
-    //                blockList[i, j].GetComponent<BlockCtrl>().isMatched = false;
-    //                blockList[i, j].GetComponent<BlockCtrl>().blockToChange = false;
-    //                initBlockColorNumber = Random.Range(0, 7);
-    //                Vector2 reStartPosition = new Vector2(i, j + offSet);  // 초기 위치를 잡아준다.
-    //                blockList[i, j].GetComponent<BlockCtrl>().BlockScaleUp();
-    //                blockList[i, j].GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
-    //                blockList[i, j].GetComponent<BlockCtrl>().transform.localPosition = reStartPosition;
+    //빈칸에 다시 채워넣는 함수
+    private void RefillBoard()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (blockList[i, j] == null)        
+                {
 
+                    blockList[i, j] = tempOjbect[tempnumber++];
+                    blockList[i, j].GetComponent<BlockCtrl>().isMatched = false;
+                    initBlockColorNumber = Random.Range(0, 7);
+                    Vector2 reStartPosition = new Vector2(i, j + offSet);  // 초기 위치를 잡아준다.
+                    blockList[i, j].GetComponent<BlockCtrl>().BlockScaleUp();
+                    blockList[i, j].GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
+                    //blockList[i, j].GetComponent<BlockCtrl>().transform.localPosition = reStartPosition;
+                    blockList[i, j].GetComponent<BlockCtrl>().column = i;
+                    blockList[i, j].GetComponent<BlockCtrl>().row = j;
+                }
+            }
+        }
+        tempnumber = 0;
+    }
 
+    //채워진 보드에 다시 매치되는 블록 판단
+    private bool MatchesOnBoard()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (blockList[i, j] != null)              
+                {
+                    if (blockList[i, j].GetComponent<BlockCtrl>().isMatched)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-    //                //GameObject block = Instantiate(blockPrefab, reStartPosition, Quaternion.identity);
-    //                //block.GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
-    //                //block.GetComponent<BlockCtrl>().column = i;
-    //                //block.GetComponent<BlockCtrl>().row = j;
-    //                //block.transform.parent = this.transform;
-    //                //block.name = "block";
-    //                //blockList[i, j] = block;  
-    //            }
-    //        }
-    //    }
-    //}
+    // 내려온 블록이 다시 매치되지 않을 때까지 돈다.
+    private IEnumerator FillBoardCoroutine()
+    {
+        RefillBoard();
+        yield return new WaitForSeconds(1.5f);
 
-    ////채워진 보드에 다시 매치되는 블록 판단
-    //private bool MatchesOnBoard()
-    //{
-    //    for (int i = 0; i < width; i++)
-    //    {
-    //        for (int j = 0; j < height; j++)
-    //        {
-    //            //if (blockList[i, j] != null)
-    //            //if(blockList[i, j].GetComponent<BlockCtrl>().blockToChange != true)
-    //           // {
-    //                if (blockList[i, j].GetComponent<BlockCtrl>().isMatched)
-    //                {
-    //                    return true;
-    //                }
-    //           // }
-    //        }
-    //    }
-    //    return false;
-    //}
+        while (MatchesOnBoard())
+        {
+            yield return new WaitForSeconds(.5f);
+            DestroyMatches();
+        }
 
-    //// 내려온 블록이 다시 매치되지 않을 때까지 돈다.
-    //private IEnumerator FillBoardCoroutine()
-    //{
-    //    RefillBoard();
-    //    yield return new WaitForSeconds(1.5f);
-
-    //    while (MatchesOnBoard())
-    //    {
-    //        yield return new WaitForSeconds(.5f);
-    //        DestroyMatches();
-    //    }
-
-    //    yield return new WaitForSeconds(.5f);
-    //    currentState = GameState.move;
-    //}
+        yield return new WaitForSeconds(.5f);
+        currentState = GameState.move;
+    }
 
 }

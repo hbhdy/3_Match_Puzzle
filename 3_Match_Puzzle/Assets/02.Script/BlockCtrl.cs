@@ -23,9 +23,7 @@ public class BlockCtrl : MonoBehaviour {
     public int previuseRow;
     public int currentColorNumber;
     public bool isMatched = false;      // 블록 일치 판별
-    public bool blockToChange = false;  // 위치 이동 시킬 블록 
-    public bool columnMatch = false;
-    public bool rowMatch = false;
+
 
     [Header("Block Color Settings")]
     public Sprite[] colorSprite;        // 블록 이미지 모음
@@ -54,11 +52,6 @@ public class BlockCtrl : MonoBehaviour {
 
     void Update()
     {
-        //if (isMatched)
-        //{
-        //    BlockScaleDown();
-        //}
-
         if (Mathf.Abs(column - transform.position.x) > .1)
         {
             // 목표한 위치로 이동 (x축)
