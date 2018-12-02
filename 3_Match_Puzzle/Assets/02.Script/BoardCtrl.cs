@@ -27,9 +27,8 @@ public class BoardCtrl : MonoBehaviour
 
     public int initBlockColorNumber;
 
-
-
     public int tempnumber = 0;
+  
 
     void Start()
     {
@@ -47,7 +46,7 @@ public class BoardCtrl : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                initBlockColorNumber = Random.Range(0, 7);
+                initBlockColorNumber = Random.Range(0, Values.maxColorRange);
                 Vector2 startPosition = new Vector2(i, j + offSet);  // 초기 위치를 잡아준다.
                 int maxCycle = 0;
 
@@ -60,7 +59,7 @@ public class BoardCtrl : MonoBehaviour
 
                 while (InitMatches(i, j, block) && maxCycle < 100)
                 {
-                    initBlockColorNumber = Random.Range(0, 7);
+                    initBlockColorNumber = Random.Range(0, Values.maxColorRange);
                     maxCycle++;
                     block.GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
                     Debug.Log(maxCycle);
@@ -124,7 +123,6 @@ public class BoardCtrl : MonoBehaviour
     // 블록 Change의 첫함수
     public void DestroyMatches()
     {
-        //int tempnumber = 0;
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -167,14 +165,14 @@ public class BoardCtrl : MonoBehaviour
             }
             changeBlockCount = 0;
         }
-        //yield return null;
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.5f);
         StartCoroutine(FillBoardCoroutine());
     }
 
     //빈칸에 다시 채워넣는 함수
     private void RefillBoard()
     {
+        SoundManager.instance.PlaySound();
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -184,11 +182,10 @@ public class BoardCtrl : MonoBehaviour
 
                     blockList[i, j] = tempOjbect[tempnumber++];
                     blockList[i, j].GetComponent<BlockCtrl>().isMatched = false;
-                    initBlockColorNumber = Random.Range(0, 7);
+                    initBlockColorNumber = Random.Range(0, Values.maxColorRange);
                     Vector2 reStartPosition = new Vector2(i, j + offSet);  // 초기 위치를 잡아준다.
                     blockList[i, j].GetComponent<BlockCtrl>().BlockScaleUp();
                     blockList[i, j].GetComponent<BlockCtrl>().ChangeColor(initBlockColorNumber);
-                    //blockList[i, j].GetComponent<BlockCtrl>().transform.localPosition = reStartPosition;
                     blockList[i, j].GetComponent<BlockCtrl>().column = i;
                     blockList[i, j].GetComponent<BlockCtrl>().row = j;
                 }

@@ -236,6 +236,7 @@
     <Compile Include="Assets\02.Script\BoardCtrl.cs" />
     <Compile Include="Assets\02.Script\FindMatchesCtrl.cs" />
     <Compile Include="Assets\02.Script\GlobalVariables.cs" />
+    <Compile Include="Assets\02.Script\SoundManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

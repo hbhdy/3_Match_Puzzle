@@ -30,7 +30,7 @@ public class BlockCtrl : MonoBehaviour {
 
     [Header("Swipe Variables")]
     public float swipeAngle = 0f;
-    public float swipeResist = 0.1f;
+    public float swipeResist = 1f;
 
 
     private FindMatchesCtrl findMatches;

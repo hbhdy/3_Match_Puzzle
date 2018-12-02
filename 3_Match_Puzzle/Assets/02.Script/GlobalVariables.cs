@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Values {
-    public const int colorRange = 7;
+    public const int maxColorRange = 7;
 }
